@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/admin/admin.css">
 
-<?php 
+<?php
 
 if (!isset($_SESSION["admin"])){
 
@@ -14,7 +14,7 @@ if (!isset($_SESSION["admin"])){
       $routesArray[1] == "plantillas" ||
       $routesArray[1] == "integraciones" ||
       $routesArray[1] == "slides" ||
-      $routesArray[1] == "banners" || 
+      $routesArray[1] == "banners" ||
       $routesArray[1] == "categorias" ||
       $routesArray[1] == "subcategorias" ||
       $routesArray[1] == "inventario" ||
@@ -31,7 +31,7 @@ if (!isset($_SESSION["admin"])){
       echo '<script>
          window.location = "'.$path.'404";
       </script>';
-      
+
     }
 
 
@@ -46,4 +46,4 @@ if (!isset($_SESSION["admin"])){
 ?>
 
 <script src="<?php echo $path ?>views/assets/js/forms/forms.js"></script>
-  
+<script src="<?php echo $path ?>views/assets/js/tables/tables.js"></script>

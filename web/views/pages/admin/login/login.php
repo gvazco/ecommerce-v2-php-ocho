@@ -9,16 +9,11 @@
       <div class="card-body">
 
         <form method="post" class="needs-validation" novalidate>
-          
+
           <div class="input-group mb-3">
 
-            <input 
-            onchange="validateJS(event,'email')"
-            type="email" 
-            class="form-control" 
-            placeholder="Email" 
-            name="loginAdminEmail" 
-            required>
+            <inputonchange="validateJS(event,'email')" type="email"class="form-control"placeholder="Email"
+              name="loginAdminEmail"required>
 
             <div class="input-group-append">
               <div class="input-group-text">
@@ -34,7 +29,7 @@
           <div class="input-group mb-3">
 
             <input type="password" class="form-control" placeholder="Password" name="loginAdminPass" required>
-           
+
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -49,10 +44,7 @@
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-                <input type="checkbox" 
-                id="remember"
-                onchange="rememberEmail(event)"
-                >
+                <input type="checkbox"id="remember" onchange="rememberEmail(event)">
                 <label for="remember">
                   Recordar
                 </label>
@@ -63,14 +55,14 @@
               <button type="submit" class="btn btn-default templateColor btn-block">Ingresar</button>
             </div>
 
-          <?php 
+            <?php
 
             require_once "controllers/admins.controller.php";
             $login = new AdminsController();
             $login -> login();
 
           ?>
-              
+
           </div>
         </form>
 
@@ -100,20 +92,15 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        
+
         <p class="login-box-msg">¿Olvidaste tu contraseña? Aquí puedes solicitar una nueva.</p>
 
         <form method="post">
-          
-           <div class="input-group mb-3">
-             
-            <input 
-            onchange="validateJS(event,'email')"
-            type="email" 
-            class="form-control" 
-            placeholder="Email" 
-            name="resetPassword" 
-            required>
+
+          <div class="input-group mb-3">
+
+            <input onchange="validateJS(event,'email')" type="email" class="form-control" placeholder="Email"
+              name="resetPassword" required>
 
             <div class="input-group-append">
               <div class="input-group-text">
@@ -128,8 +115,9 @@
 
           <div class="row">
             <div class="col-12">
-              
-                <button type="submit" class="btn btn-default templateColor btn-block py-2">Recibir nueva contraseña</button>
+
+              <button type="submit" class="btn btn-default templateColor btn-block py-2">Recibir nueva
+                contraseña</button>
             </div>
 
           </div>

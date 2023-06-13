@@ -99,4 +99,32 @@ class TemplateController{
 
 	}
 
+	/*=============================================
+	Función Limpiar HTML
+	=============================================*/
+
+	static public function htmlClean($code){
+
+		$search = array('/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s');
+
+		$replace = array('>','<','\\1');
+
+		$code = preg_replace($search, $replace, $code);
+
+		$code = str_replace("> <", "><", $code);
+
+		return $code;
+	}
+
+	/*=============================================
+	Función para mayúscula inicial
+	=============================================*/
+
+	static public function capitalize($value){
+
+		$value = mb_convert_case($value, MB_CASE_TITLE, "UTF-8");
+	    return $value;
+
+	}
+
 }

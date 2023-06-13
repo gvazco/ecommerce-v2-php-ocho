@@ -21,8 +21,9 @@ $routesArray = explode("/",$_SERVER["REQUEST_URI"]);
 array_shift($routesArray);
 
 foreach ($routesArray as $key => $value) {
-$routesArray[$key] = explode("?",$value)[0];
+  $routesArray[$key] = explode("?",$value)[0];
 }
+
 
 /*=============================================
 Solicitud GET de Template
@@ -40,7 +41,19 @@ if($template->status == 200){
 
 }else{
 
- //redireccionar a página 500
+  echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <link rel="stylesheet" href="'.$path.'views/assets/css/plugins/adminlte/adminlte.min.css">
+        </head>
+        <body class="hold-transition sidebar-collapse layout-top-nav">
+        <div class="wrapper">';
+        include "pages/500/500.php";
+  echo '</div>
+        </body>
+        </html>';
+
+  return;
 
 }
 
@@ -109,6 +122,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- JDSlider -->
   <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/jdSlider/jdSlider.css">
 
+  <!-- Notie Alert -->
+  <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/notie/notie.min.css">
+
+  <!-- Toastr Alert -->
+  <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/toastr/toastr.min.css">
+
+  <!-- Material Preloader -->
+  <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/material-preloader/material-preloader.css">
+
+  <!-- DataTables -->
+  <link rel="stylesheet"
+    href="<?php echo $path ?>views/assets/css/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet"
+    href="<?php echo $path ?>views/assets/css/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet"
+    href="<?php echo $path ?>views/assets/css/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $path ?>views/assets/css/plugins/adminlte/adminlte.min.css">
 
@@ -154,23 +184,73 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Knob -->
   <script src="<?php echo $path ?>views/assets/js/plugins/knob/knob.js"></script>
 
+  <script src="<?php echo $path ?>views/assets/js/alerts/alerts.js"></script>
+
+  <!-- Notie Alert -->
+  <!-- https://jaredreich.com/notie/ -->
+  <script src="<?php echo $path ?>views/assets/js/plugins/notie/notie.min.js"></script>
+
+  <!-- Sweet Alert 2 -->
+  <!-- https://sweetalert2.github.io/ -->
+  <script src="<?php echo $path ?>views/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+  <!-- Toastr Alert-->
+  <script src="<?php echo $path ?>views/assets/js/plugins/toastr/toastr.min.js"></script>
+
+  <!-- Material Preloader -->
+  <!-- https://www.jqueryscript.net/demo/Google-Inbox-Style-Linear-Preloader-Plugin-with-jQuery-CSS3/ -->
+  <script src="<?php echo $path ?>views/assets/js/plugins/material-preloader/material-preloader.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js">
+  </script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-responsive/js/responsive.bootstrap4.min.js">
+  </script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/jszip/jszip.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="<?php echo $path ?>views/assets/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
 </head>
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
+
+  <input type="hidden" id="urlPath" value="<?php echo $path ?>">
   <div class="wrapper">
 
     <?php
 
   include "modules/top.php";
   include "modules/navbar.php";
-  include "modules/sidebar.php";
+
+  if (isset($_SESSION["admin"])){
+    include "modules/sidebar.php";
+  }
 
   if(!empty($routesArray[0])) {
-    if($routesArray[0] == "admin") {
-      include "pages/admin/admin.php";
+
+    if($routesArray[0] == "admin" ||
+       $routesArray[0] == "salir"){
+
+      include "pages/".$routesArray[0]."/".$routesArray[0].".php";
+
+    }else{
+
+      include "pages/404/404.php";
+
     }
+
   }else{
+
     include "pages/home/home.php";
+
   }
 
   include "modules/footer.php";
